@@ -3,10 +3,7 @@ const { Todo } = require('./../../models/todo');
 const { User } = require('./../../models/user');
 const jwt = require('jsonwebtoken');
 
-const todos = [
-    { text: 'First Test todo', _id: new ObjectID() },
-    { text: 'Second Test todo', _id: new ObjectID() }
-];
+
 const userOneId = new ObjectID();
 const userTwoId = new ObjectID();
 const users = [{
@@ -21,7 +18,12 @@ const users = [{
     _id: userTwoId,
     email: 'test2@gmail.com',
     password: 'userTwpPass'
-}]
+}];
+
+const todos = [
+    { text: 'First Test todo', _id: new ObjectID(), _creator: userOneId },
+    { text: 'Second Test todo', _id: new ObjectID(), _creator: userTwoId }
+];
 
 const populateTodos = (done) => {
     Todo.remove({}).then(() => {
@@ -36,4 +38,4 @@ const populateUsers = (done) => {
     }).then(() => done());
 }
 
-module.exports = { todos, populateTodos,users,populateUsers };
+module.exports = { todos, populateTodos, users, populateUsers };
